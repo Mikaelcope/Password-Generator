@@ -91,16 +91,24 @@ var upperCasedCharacters = [
 // Function to prompt user for password options
 function generatePassword() {
   var charnum = prompt('How many charecters would you like in you prassword?')
-    if (charnum < 8 && charnum > 128) {
-      alert("Please enter a lenght of password betweeen 8 and 128 characters.")
-      generatePassword()
-    }
-  
-    let newarray = []
+  console.log(/^\d+$/.test(charnum))
+  if (!(/^\d+$/.test(charnum))) {
+    console.log("Inside first IF");
+    alert("Please enter a valid number")
+    return generatePassword()   
+  }
+  if ( charnum < 8 || charnum > 128) {
+    console.log("Inside second IF");
+    alert("Please enter length of password betweeen 8 and 128 characters.")
+    return generatePassword()
+  }
+
+  //Creating new array with characters that are selected
+  let newarray = []
   var Lowercasetrue = confirm('Would you like lowercase in your password?')
-    if (Lowercasetrue === true) {
-      newarray = newarray.concat(lowerCasedCharacters)
-    }
+  if (Lowercasetrue === true) {
+    newarray = newarray.concat(lowerCasedCharacters)
+  }
   var Uppercasetrue = confirm('Would you like uppercase in your password?')
   if (Uppercasetrue === true) {
     newarray = newarray.concat(upperCasedCharacters)
@@ -113,45 +121,24 @@ function generatePassword() {
   if (Specialtrue === true) {
     newarray = newarray.concat(specialCharacters)
   }
-
-console.log(newarray)
+  console.log(newarray);
+  //Generating a new password from new array that is created from selections
   let randompassword = ''
-    for(let i = 0; i < charnum; i++) {
-    var randomindex = Math.floor(Math.random()*newarray.length)
-    console.log(randomindex)
+  for (let i = 0; i < charnum; i++) {
+    console.log("Inside IF loop");
+    var randomindex = Math.floor(Math.random() * newarray.length)
     randompassword = randompassword + newarray[randomindex]
-    console.log(randompassword)
-    } 
-    return randompassword
+  }
+  return randompassword
 }
 
-
-//Length of password
-// At least 8 characters but no more than 128.
-// Character types
-// Lowercase
-// Uppercase
-// Numeric
-// Special characters ($@%&*, etc)
-
-  //return passwork criteria that the user chose base on prompts
-
-// Function for getting a random element from an array
-function getRandom(arr) {
-
-
-  //get a random number in the range of the lenght of the array to serve as the index of the array
-  //return the array at that random number
-}
-
-// Function to generate password with user input
-
-// Get references to the #generate element
 var generateBtn = document.querySelector('#generate');
 
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
+  console.log("Password");
+  console.log(password);
   var passwordText = document.querySelector('#password');
 
   passwordText.value = password;
