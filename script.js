@@ -99,25 +99,25 @@ function generatePassword() {
     let newarray = []
   var Lowercasetrue = confirm('Would you like lowercase in your password?')
     if (Lowercasetrue === true) {
-      newarray = newarray + newarray.concat(Lowercasetrue)
+      newarray = newarray.concat(lowerCasedCharacters)
     }
   var Uppercasetrue = confirm('Would you like uppercase in your password?')
   if (Uppercasetrue === true) {
-    newarray = newarray + newarray.concat(Uppercasetrue)
+    newarray = newarray.concat(upperCasedCharacters)
   }
   var Numerictrue = confirm('Would you like numbers in your password?')
   if (Numerictrue === true) {
-    newarray = newarray + newarray.concat(Numerictrue)
+    newarray = newarray.concat(numericCharacters)
   }
   var Specialtrue = confirm('Would you like special charecters in your password?')
   if (Specialtrue === true) {
-    newarray = newarray + newarray.concat(Specialtrue)
+    newarray = newarray.concat(specialCharacters)
   }
 
 console.log(newarray)
   let randompassword = ''
     for(let i = 0; i < charnum; i++) {
-    var randomindex = Math.floor(Math.random()*charnum)
+    var randomindex = Math.floor(Math.random()*newarray.length)
     console.log(randomindex)
     randompassword = randompassword + newarray[randomindex]
     console.log(randompassword)
