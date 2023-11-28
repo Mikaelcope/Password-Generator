@@ -1,4 +1,3 @@
-// Array of special characters to be included in password
 var specialCharacters = [
   '@',
   '%',
@@ -90,15 +89,12 @@ var upperCasedCharacters = [
 
 // Function to prompt user for password options
 function generatePassword() {
-  var charnum = prompt('How many charecters would you like in you prassword?')
-  console.log(/^\d+$/.test(charnum))
+  var charnum = prompt('How many charecters would you like in you prassword? Please choose a number between 8 and 128.')
   if (!(/^\d+$/.test(charnum))) {
-    console.log("Inside first IF");
     alert("Please enter a valid number")
     return generatePassword()   
   }
   if ( charnum < 8 || charnum > 128) {
-    console.log("Inside second IF");
     alert("Please enter length of password betweeen 8 and 128 characters.")
     return generatePassword()
   }
@@ -121,11 +117,13 @@ function generatePassword() {
   if (Specialtrue === true) {
     newarray = newarray.concat(specialCharacters)
   }
-  console.log(newarray);
+  if (!Lowercasetrue && !Uppercasetrue && !Numerictrue && !Specialtrue) {
+    alert('Please select at least on character type')
+    return generatePassword();
+  }
   //Generating a new password from new array that is created from selections
   let randompassword = ''
   for (let i = 0; i < charnum; i++) {
-    console.log("Inside IF loop");
     var randomindex = Math.floor(Math.random() * newarray.length)
     randompassword = randompassword + newarray[randomindex]
   }
@@ -137,10 +135,7 @@ var generateBtn = document.querySelector('#generate');
 // Write password to the #password input
 function writePassword() {
   var password = generatePassword();
-  console.log("Password");
-  console.log(password);
   var passwordText = document.querySelector('#password');
-
   passwordText.value = password;
 }
 
